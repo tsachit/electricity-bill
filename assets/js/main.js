@@ -132,8 +132,8 @@ $( document ).ready(function() {
 
   function clearForm() {
       $("#ampere").val(15);
-      $("#discount").val(25);
-      $("#rebate").val('');
+      $("#discount").val('');
+      $("#lockdowndiscount").prop("checked", true);
       $("#units").val('');
       clearCalculation();
   }
