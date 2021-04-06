@@ -1,61 +1,66 @@
 $( document ).ready(function() {
-  var lockdownDiscountPercent = 25;
-  $("#lockdowndiscountlabel").html(lockdownDiscountPercent);
   var tariff = {
       5: [
-          { min: 0, max: 20, rangeText: '0 - 20', serviceCharge: 30.00, energyCharge: 3.00 },
-          { min: 20, max: 30, rangeText: '21 - 30', serviceCharge: 50.00, energyCharge: 7.00 },
-          { min: 30, max: 50, rangeText: '31 - 50', serviceCharge: 75.00, energyCharge: 8.50 },
-          { min: 50, max: 150, rangeText: '51 - 150', serviceCharge: 100.00, energyCharge: 10.00 },
-          { min: 150, max: 250, rangeText: '151 - 250', serviceCharge: 125.00, energyCharge: 11.00 },
-          { min: 250, max: 400, rangeText: '251 - 400', serviceCharge: 150.00, energyCharge: 12.00 },
-          { min: 400, max: null, rangeText: 'Above 400', serviceCharge: 175.00, energyCharge: 13.00 }
+          { min: 0, max: 10, rangeText: '0 - 10', minimumCharge: 30.00, energyCharge: 0.00, },
+          { min: 10, max: 20, rangeText: '11 - 20', minimumCharge: 30.00, energyCharge: 3.00, },
+          { min: 20, max: 30, rangeText: '21 - 30', minimumCharge: 50.00, energyCharge: 6.50, },
+          { min: 30, max: 50, rangeText: '31 - 50', minimumCharge: 50.00, energyCharge: 8.00, },
+          { min: 50, max: 100, rangeText: '51 - 100', minimumCharge: 75.00, energyCharge: 9.50, },
+          { min: 100, max: 150, rangeText: '101 - 150', minimumCharge: 100.00, energyCharge: 9.50, },
+          { min: 150, max: 250, rangeText: '151 - 250', minimumCharge: 125.00, energyCharge: 10.00, },
+          { min: 250, max: 400, rangeText: '251 - 400', minimumCharge: 150.00, energyCharge: 11.00, },
+          { min: 400, max: null, rangeText: 'Above 400', minimumCharge: 175.00, energyCharge: 12.00, },
       ],
       15: [
-          { min: 0, max: 20, rangeText: '0 - 20', serviceCharge: 50.00, energyCharge: 4.00 },
-          { min: 20, max: 30, rangeText: '21 - 30', serviceCharge: 75.00, energyCharge: 7.00 },
-          { min: 30, max: 50, rangeText: '31 - 50', serviceCharge: 100.00, energyCharge: 8.50 },
-          { min: 50, max: 150, rangeText: '51 - 150', serviceCharge: 125.00, energyCharge: 10.00 },
-          { min: 150, max: 250, rangeText: '151 - 250', serviceCharge: 150.00, energyCharge: 11.00 },
-          { min: 250, max: 400, rangeText: '251 - 400', serviceCharge: 175.00, energyCharge: 12.00 },
-          { min: 400, max: null, rangeText: 'Above 400', serviceCharge: 200.00, energyCharge: 13.00 }
+          { min: 0, max: 10, rangeText: '0 - 10', minimumCharge: 50.00, energyCharge: 4.00, },
+          { min: 10, max: 20, rangeText: '11 - 20', minimumCharge: 50.00, energyCharge: 4.00, },
+          { min: 20, max: 30, rangeText: '21 - 30', minimumCharge: 75.00, energyCharge: 6.50, },
+          { min: 30, max: 50, rangeText: '31 - 50', minimumCharge: 75.00, energyCharge: 8.00, },
+          { min: 50, max: 100, rangeText: '51 - 100', minimumCharge: 100.00, energyCharge: 9.50, },
+          { min: 100, max: 150, rangeText: '101 - 150', minimumCharge: 125.00, energyCharge: 9.50, },
+          { min: 150, max: 250, rangeText: '151 - 250', minimumCharge: 150.00, energyCharge: 10.00, },
+          { min: 250, max: 400, rangeText: '251 - 400', minimumCharge: 175.00, energyCharge: 11.00, },
+          { min: 400, max: null, rangeText: 'Above 400', minimumCharge: 200.00, energyCharge: 12.00, },
       ],
       30: [
-          { min: 0, max: 20, rangeText: '0 - 20', serviceCharge: 75.00, energyCharge: 5.00 },
-          { min: 20, max: 30, rangeText: '21 - 30', serviceCharge: 100.00, energyCharge: 7.00 },
-          { min: 30, max: 50, rangeText: '31 - 50', serviceCharge: 125.00, energyCharge: 8.50 },
-          { min: 50, max: 150, rangeText: '51 - 150', serviceCharge: 150.00, energyCharge: 10.00 },
-          { min: 150, max: 250, rangeText: '151 - 250', serviceCharge: 175.00, energyCharge: 11.00 },
-          { min: 250, max: 400, rangeText: '251 - 400', serviceCharge: 200.00, energyCharge: 12.00 },
-          { min: 400, max: null, rangeText: 'Above 400', serviceCharge: 225.00, energyCharge: 13.00 }
+          { min: 0, max: 10, rangeText: '0 - 10', minimumCharge: 75.00, energyCharge: 5.00, },
+          { min: 10, max: 20, rangeText: '11 - 20', minimumCharge: 75.00, energyCharge: 5.00, },
+          { min: 20, max: 30, rangeText: '21 - 30', minimumCharge: 100.00, energyCharge: 6.50, },
+          { min: 30, max: 50, rangeText: '31 - 50', minimumCharge: 100.00, energyCharge: 8.00, },
+          { min: 50, max: 100, rangeText: '51 - 100', minimumCharge: 125.00, energyCharge: 9.50, },
+          { min: 100, max: 150, rangeText: '101 - 150', minimumCharge: 150.00, energyCharge: 9.50, },
+          { min: 150, max: 250, rangeText: '151 - 250', minimumCharge: 175.00, energyCharge: 10.00, },
+          { min: 250, max: 400, rangeText: '251 - 400', minimumCharge: 200.00, energyCharge: 11.00, },
+          { min: 400, max: null, rangeText: 'Above 400', minimumCharge: 225.00, energyCharge: 12.00, },
       ],
       60: [
-          { min: 0, max: 20, rangeText: '0 - 20', serviceCharge: 125.00, energyCharge: 6.00 },
-          { min: 20, max: 30, rangeText: '21 - 30', serviceCharge: 150.00, energyCharge: 7.00 },
-          { min: 30, max: 50, rangeText: '31 - 50', serviceCharge: 175.00, energyCharge: 8.50 },
-          { min: 50, max: 150, rangeText: '51 - 150', serviceCharge: 200.00, energyCharge: 10.00 },
-          { min: 150, max: 250, rangeText: '151 - 250', serviceCharge: 225.00, energyCharge: 11.00 },
-          { min: 250, max: 400, rangeText: '251 - 400', serviceCharge: 250.00, energyCharge: 12.00 },
-          { min: 400, max: null, rangeText: 'Above 400', serviceCharge: 275.00, energyCharge: 13.00 }
+          { min: 0, max: 10, rangeText: '0 - 10', minimumCharge: 125.00, energyCharge: 6.00, },
+          { min: 10, max: 20, rangeText: '11 - 20', minimumCharge: 125.00, energyCharge: 6.00, },
+          { min: 20, max: 30, rangeText: '21 - 30', minimumCharge: 125.00, energyCharge: 6.50, },
+          { min: 30, max: 50, rangeText: '31 - 50', minimumCharge: 125.00, energyCharge: 8.00, },
+          { min: 50, max: 100, rangeText: '51 - 100', minimumCharge: 150.00, energyCharge: 9.50, },
+          { min: 100, max: 150, rangeText: '101 - 150', minimumCharge: 200.00, energyCharge: 9.50, },
+          { min: 150, max: 250, rangeText: '151 - 250', minimumCharge: 200.00, energyCharge: 10.00, },
+          { min: 250, max: 400, rangeText: '251 - 400', minimumCharge: 250.00, energyCharge: 11.00, },
+          { min: 400, max: null, rangeText: 'Above 400', minimumCharge: 275.00, energyCharge: 12.00, },
       ]
   }
 
-  $( "#ampere, #discount, #units, #lockdowndiscount" ).change(function() {
+  $( "#ampere, #rebpen, #units, #penalty" ).change(function() {
       clearCalculation();
       var ampere = $("#ampere").val();
       var totalUnits = parseInt($("#units").val());
-      var discount = parseInt($("#discount").val());
+      var rebpen = parseInt($("#rebpen").val());
 
-      console.log(totalUnits, typeof totalUnits, );
       if( ampere == '' || Object.is(totalUnits, NaN) || totalUnits <= 0 || !tariff.hasOwnProperty(ampere))
           return
 
       var totalCharge = 0;
       var unitRangeCharge = 0;
-      var finalServiceCharge = 0;
+      var finalMinimumCharge = 0;
       var selectedPlan = tariff[ampere];
       selectedPlan.forEach(function myFunction(value) {
-          var { min, max, energyCharge, serviceCharge, rangeText } = value;
+          var { min, max, energyCharge, minimumCharge, rangeText } = value;
           var maxValue = ( max === null) ? totalUnits : max;
           var consumedUnits = totalUnits;
           if((totalUnits >= maxValue && max !== null) || (totalUnits > min && totalUnits <= maxValue)) {
@@ -68,72 +73,62 @@ $( document ).ready(function() {
               consumedUnits -= units;
               unitRangeCharge = units * parseFloat(value.energyCharge, 10);
               totalCharge += unitRangeCharge;
-              finalServiceCharge = serviceCharge;
-              $("#bill-listing").append(addListItem(serviceCharge, rangeText, units, energyCharge, unitRangeCharge))
+              finalMinimumCharge = minimumCharge;
+              $("#bill-listing").append(addListItem(minimumCharge, rangeText, units, energyCharge, unitRangeCharge))
           }
       });
-      displayTotal(finalServiceCharge, totalUnits, discount, totalCharge);
+      displayTotal(finalMinimumCharge, totalUnits, rebpen, totalCharge);
   });
 
   // reset the fields
   $( "#reset" ).click(clearForm);
 
-  function addListItem(serviceCharge, rangeText, units, energyCharge, unitRangeCharge) {
+  function addListItem(minimumCharge, rangeText, units, energyCharge, unitRangeCharge) {
       return `<div class="row d-flex list-unstyled-item list-hours-item">
-          <div class="col">Rs. ${serviceCharge}</div>
+          <div class="col">Rs. ${minimumCharge}</div>
           <div class="col">${rangeText}</div>
           <div class="col">${units}</div>
           <div class="col">${energyCharge}</div>
-          <div class="col">Rs. ${unitRangeCharge}</div>
+          <div class="col right">Rs. ${unitRangeCharge}</div>
       </div>`;
   }
 
-  function addTotalListing(finalServiceCharge, totalUnits, totalCharge) {
-      return `<div class="col">Final Service Charge: Rs. ${finalServiceCharge}</div>
+  function addTotalListing(finalMinimumCharge, totalUnits, totalCharge) {
+      return `<div class="col">Final Minimum Charge: Rs. ${finalMinimumCharge}</div>
               <div class="col">Total</div>
               <div class="col">${totalUnits}</div>
               <div class="col"></div>
-              <div class="col">Rs. ${totalCharge}</div>`;
+              <div class="col right">Rs. ${totalCharge}</div>`;
   }
 
-  function displayTotal(finalServiceCharge, totalUnits, discount, totalCharge){
+  function displayTotal(finalMinimumCharge, totalUnits, rebpen, totalCharge){
       $("#bill-heading").show();
-      $("#total-listing").html(addTotalListing(finalServiceCharge, totalUnits, totalCharge));
-      $("#grand-total").html(addGrandTotal(totalCharge, discount, finalServiceCharge));
+      $("#total-listing").html(addTotalListing(finalMinimumCharge, totalUnits, totalCharge));
+      $("#grand-total").html(addGrandTotal(totalCharge, rebpen, finalMinimumCharge));
   }
 
-  function addGrandTotal(totalUnitCharge, discount, finalServiceCharge) {
-      var htmlContent = `<p><strong>Meter Charge: </strong>Rs. ${totalUnitCharge}</p>`;
+  function addGrandTotal(totalUnitCharge, rebpen, finalMinimumCharge) {
+      var totalCharge = totalUnitCharge + finalMinimumCharge;
+      var htmlContent = `<p><strong>Meter Charge: </strong>Rs. ${totalUnitCharge}</p>
+                         <p><strong>Minimum Charge: </strong>Rs. ${finalMinimumCharge}</p>
+                         <p><strong>Total Charge: </strong>Rs. ${totalCharge}</p>`;
 
-      // lockdown discount
-      if($("#lockdowndiscount").prop("checked") == true && lockdownDiscountPercent > 0){
-          console.log("Lockdown discount is given.");
-          var lockdownDiscountAmount = (totalUnitCharge * (lockdownDiscountPercent/100)).toFixed(2);
-          var totalUnitCharge = totalUnitCharge - lockdownDiscountAmount;
-          htmlContent = `${htmlContent}
-              <p><strong>Lockdown discount(${lockdownDiscountPercent}%): </strong>Rs. ${lockdownDiscountAmount}</p>
-              <p><strong>Total Meter Charge: </strong>Rs. ${totalUnitCharge}</p><br/>`;
+      // rebate / penalty 
+      if(rebpen > 0){
+        console.log($("#penalty").prop("checked"), typeof $("#penalty").prop("checked") );
+          var rebpenAmount = (totalCharge * (rebpen/100)).toFixed(2);
+          totalCharge = $("#penalty").prop("checked") ? totalCharge + rebpenAmount : totalCharge - rebpenAmount;
+          htmlContent = `${htmlContent} <hr/>
+              <p><strong>${$("#penalty").prop("checked")?'Penalty percentage (+':'Rebate discount (-'}${rebpen}%): </strong>Rs. ${rebpenAmount}</p>
+              <p><strong>Total Meter Charge: </strong>Rs. ${totalCharge}</p><br/>`;
       }
 
-      // rebate discount
-      if(discount > 0){
-          console.log("Rebate discount is given.");
-          var discountAmount = (totalUnitCharge * (discount/100)).toFixed(2);
-          var totalUnitCharge = totalUnitCharge - discountAmount;
-          htmlContent = `${htmlContent}
-              <p><strong>Rebate discount(${discount}%): </strong>Rs. ${discountAmount}</p>
-              <p><strong>Total Meter Charge: </strong>Rs. ${totalUnitCharge}</p><br/>`;
-      }
-
-      return `${htmlContent}
-              <p><strong>Service Charge: </strong>Rs. ${finalServiceCharge}</p>
-              <p><strong>Total Charge: </strong>Rs. ${totalUnitCharge + finalServiceCharge}</p>`;
+      return htmlContent;
   }
 
   function clearForm() {
       $("#ampere").val(15);
-      $("#discount").val('');
-      $("#lockdowndiscount").prop("checked", true);
+      $("#rebpen").val('');
       $("#units").val('');
       clearCalculation();
   }
