@@ -46,11 +46,12 @@ $( document ).ready(function() {
       ]
   }
 
-  $( "#ampere, #rebpen, #units, #penalty" ).change(function() {
+  $( "#ampere, #rebpen, #units, #arrears, #penalty" ).change(function() {
       clearCalculation();
       var ampere = $("#ampere").val();
       var totalUnits = parseInt($("#units").val());
       var rebpen = parseInt($("#rebpen").val());
+      var arrears = parseFloat($("#arrears").val() || 0);
 
       if( ampere == '' || Object.is(totalUnits, NaN) || totalUnits <= 0 || !tariff.hasOwnProperty(ampere))
           return
@@ -77,7 +78,7 @@ $( document ).ready(function() {
               $("#bill-listing").append(addListItem(minimumCharge, rangeText, units, energyCharge, unitRangeCharge))
           }
       });
-      displayTotal(finalMinimumCharge, totalUnits, rebpen, totalCharge);
+      displayTotal(finalMinimumCharge, totalUnits, arrears, rebpen, totalCharge);
   });
 
   // reset the fields
@@ -101,33 +102,35 @@ $( document ).ready(function() {
               <div class="col right">Rs. ${totalCharge}</div>`;
   }
 
-  function displayTotal(finalMinimumCharge, totalUnits, rebpen, totalCharge){
+  function displayTotal(finalMinimumCharge, totalUnits, arrears, rebpen, totalCharge){
       $("#bill-heading").show();
       $("#total-listing").html(addTotalListing(finalMinimumCharge, totalUnits, totalCharge));
-      $("#grand-total").html(addGrandTotal(totalCharge, rebpen, finalMinimumCharge));
+      $("#grand-total").html(addGrandTotal(totalCharge, arrears, rebpen, finalMinimumCharge));
   }
 
-  function addGrandTotal(totalUnitCharge, rebpen, finalMinimumCharge) {
-      var totalCharge = totalUnitCharge + finalMinimumCharge;
-      var htmlContent = `<p><strong>Meter Charge: </strong>Rs. ${totalUnitCharge}</p>
+  function addGrandTotal(totalUnitCharge, arrears, rebpen, finalMinimumCharge) {
+      var currentAmount = totalUnitCharge + finalMinimumCharge;
+      var billAmount = currentAmount - arrears;
+      var htmlContent = `<p><strong>Energy Charge: </strong>Rs. ${totalUnitCharge}</p>
                          <p><strong>Minimum Charge: </strong>Rs. ${finalMinimumCharge}</p>
-                         <p><strong>Total Charge: </strong>Rs. ${totalCharge}</p>`;
+                         <p><strong>Current Amount: </strong>Rs. ${currentAmount}</p><hr/>
+                         <p><strong>Arrears Amount: </strong>Rs. ${arrears}</p>`;
 
       // rebate / penalty 
       if(rebpen > 0){
-        console.log($("#penalty").prop("checked"), typeof $("#penalty").prop("checked") );
-          var rebpenAmount = (totalCharge * (rebpen/100)).toFixed(2);
-          totalCharge = $("#penalty").prop("checked") ? totalCharge + rebpenAmount : totalCharge - rebpenAmount;
-          htmlContent = `${htmlContent} <hr/>
-              <p><strong>${$("#penalty").prop("checked")?'Penalty percentage (+':'Rebate discount (-'}${rebpen}%): </strong>Rs. ${rebpenAmount}</p>
-              <p><strong>Total Meter Charge: </strong>Rs. ${totalCharge}</p><br/>`;
+          var rebpenAmount = parseFloat((billAmount * (rebpen/100)).toFixed(2));
+          billAmount = $("#penalty").prop("checked") ? billAmount + rebpenAmount : billAmount - rebpenAmount;
+          billAmount = billAmount.toFixed(2);
+          htmlContent = `${htmlContent} <p><strong>Bill Amount: </strong>Rs. ${billAmount}</p> <hr/>
+              <p><strong>${$("#penalty").prop("checked")?'Penalty percentage (+':'Rebate discount (-'}${rebpen}%): </strong>Rs. ${rebpenAmount}</p>`;
       }
 
-      return htmlContent;
+      return `${htmlContent}<p><strong>Final Payable Amount: </strong>Rs. ${billAmount}</p>`;
   }
 
   function clearForm() {
       $("#ampere").val(15);
+      $("#arrears").val(0);
       $("#rebpen").val('');
       $("#units").val('');
       clearCalculation();
