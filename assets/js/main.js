@@ -1,7 +1,7 @@
 $( document ).ready(function() {
   var tariff = {
       5: [
-          { min: 0, max: 10, rangeText: '0 - 10', minimumCharge: 30.00, energyCharge: 0.00, },
+          { min: 0, max: 10, rangeText: '0 - 10', minimumCharge: 30.00, energyCharge: 3.00, },
           { min: 10, max: 20, rangeText: '11 - 20', minimumCharge: 30.00, energyCharge: 3.00, },
           { min: 20, max: 30, rangeText: '21 - 30', minimumCharge: 50.00, energyCharge: 6.50, },
           { min: 30, max: 50, rangeText: '31 - 50', minimumCharge: 50.00, energyCharge: 8.00, },
@@ -72,7 +72,10 @@ $( document ).ready(function() {
               }
 
               consumedUnits -= units;
-              unitRangeCharge = units * parseFloat(value.energyCharge, 10);
+              if(ampere === "5" && totalUnits <=10) {
+                  energyCharge = 0;
+              }
+              unitRangeCharge = units * parseFloat(energyCharge, 10);
               totalCharge += unitRangeCharge;
               finalMinimumCharge = minimumCharge;
               $("#bill-listing").append(addListItem(minimumCharge, rangeText, units, energyCharge, unitRangeCharge))
